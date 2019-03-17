@@ -1,5 +1,5 @@
-BERT_BASE_DIR=/Users/cicipan/projects/CS224N/project/bert/uncased_L-12_H-768_A-12
-OUTPUT_DIR=/Users/cicipan/projects/CS224N/project/output_dir
+BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
+OUTPUT_DIR=$HOME/project/bert-squad-pretrain/output_dir
 
 
 python create_pretraining_data.py \

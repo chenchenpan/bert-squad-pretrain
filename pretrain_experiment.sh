@@ -1,9 +1,9 @@
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
-OUTPUT_DIR=$HOME/project/bert-squad-pretrain/output_dir
+OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir
 
 
 python create_pretraining_data.py \
-  --input_file=./pretrain_squad.txt \
+  --input_file=./pretrain_squad_fake.txt \
   --output_file=/tmp/tf_examples.tfrecord \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
   --do_lower_case=True \

@@ -3,7 +3,7 @@ OUTPUT_DIR=$HOME/project/bert-squad-pretrain/output_dir
 
 
 python create_pretraining_data.py \
-  --input_file=./pretrain_squad_fake.txt \
+  --input_file=./pretrain_squad.txt \
   --output_file=/tmp/tf_examples.tfrecord \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
   --do_lower_case=True \

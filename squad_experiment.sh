@@ -5,7 +5,7 @@ OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir/fake
 python run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
   --bert_config_file=$BERT_BASE_DIR/bert_config_fake.json \
-  --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
+  --init_checkpoint=$BERT_BASE_DIR/pretrain_on_squad/bert_model-20.ckpt \
   --do_train=True \
   --train_file=$SQUAD_DIR/fake_train-v2.0.json \
   --do_predict=True \

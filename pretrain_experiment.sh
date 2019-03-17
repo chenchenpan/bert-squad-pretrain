@@ -1,5 +1,5 @@
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
-OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir
+# OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir
 
 
 python create_pretraining_data.py \
@@ -15,7 +15,7 @@ python create_pretraining_data.py \
 
   python run_pretraining.py \
   --input_file=/tmp/tf_examples.tfrecord \
-  --output_dir=$OUTPUT_DIR/pretraining_output \
+  --output_dir=$BERT_BASE_DIR/pretrain_on_squad \
   --do_train=True \
   --do_eval=True \
   --bert_config_file=$BERT_BASE_DIR/bert_config.json \

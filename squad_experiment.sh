@@ -1,28 +1,28 @@
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
 SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
-OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir/fake
+# OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir/fake
 
 python run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
-  --bert_config_file=$BERT_BASE_DIR/bert_config_fake.json \
-  --init_checkpoint=$BERT_BASE_DIR/pretrain_on_squad/bert_model-20.ckpt \
+  --bert_config_file=$BERT_BASE_DIR/bert_config.json \
+  --init_checkpoint=$BERT_BASE_DIR/pretrain_on_squad/model.ckpt-20 \
   --do_train=True \
   --train_file=$SQUAD_DIR/fake_train-v2.0.json \
   --do_predict=True \
   --predict_file=$SQUAD_DIR/fake_train-v2.0.json \
-  --train_batch_size=24 \
+  --train_batch_size=32 \
   --learning_rate=3e-2 \
-  --num_train_epochs=100.0 \
-  --max_seq_length=384 \
+  --num_train_epochs=2.0 \
+  --max_seq_length=128 \
   --doc_stride=128 \
-  --output_dir=$OUTPUT_DIR\
+  --output_dir=$SQUAD_DIR\
   --version_2_with_negative=True
 
 
-python $SQUAD_DIR/evaluate-v2.0.py \
-  $SQUAD_DIR/fake_train-v2.0.json \
-  $OUTPUT_DIR/predictions.json \
-  --na-prob-file $OUTPUT_DIR/null_odds.json
+# python $SQUAD_DIR/evaluate-v2.0.py \
+#   $SQUAD_DIR/fake_train-v2.0.json \
+#   $OUTPUT_DIR/predictions.json \
+#   --na-prob-file $OUTPUT_DIR/null_odds.json
 
 
 

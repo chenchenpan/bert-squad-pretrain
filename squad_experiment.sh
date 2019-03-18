@@ -1,6 +1,6 @@
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
 SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
-# OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/output_dir/fake
+OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/squad
 
 python run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
@@ -18,11 +18,10 @@ python run_squad.py \
   --output_dir=$SQUAD_DIR\
   --version_2_with_negative=True
 
-
-# python $SQUAD_DIR/evaluate-v2.0.py \
-#   $SQUAD_DIR/fake_train-v2.0.json \
-#   $OUTPUT_DIR/predictions.json \
-#   --na-prob-file $OUTPUT_DIR/null_odds.json
+python $SQUAD_DIR/evaluate-v2.0.py \
+  $SQUAD_DIR/fake_train-v2.0.json \
+  $OUTPUT_DIR/predictions.json \
+  --na-prob-file $OUTPUT_DIR/null_odds.json
 
 
 

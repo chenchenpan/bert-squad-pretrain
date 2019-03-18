@@ -15,7 +15,7 @@ python create_pretraining_data.py \
   --random_seed=12345 \
   --dupe_factor=5
 
-  python run_pretraining.py \
+python run_pretraining.py \
   --input_file=/tmp/tf_examples.tfrecord \
   --output_dir=$BERT_BASE_DIR/pretrain_on_squad \
   --do_train=True \
@@ -29,8 +29,7 @@ python create_pretraining_data.py \
   --num_warmup_steps=10 \
   --learning_rate=2e-5
 
-
-  python run_squad.py \
+python run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
   --bert_config_file=$BERT_BASE_DIR/bert_config.json \
   --init_checkpoint=$BERT_BASE_DIR/pretrain_on_squad/model.ckpt-20 \

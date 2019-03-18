@@ -1,6 +1,5 @@
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
 SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
-OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/squad/output
 MAX_SEQ_LEN=128
 BATCH_SIZE=32
 
@@ -29,7 +28,7 @@ python create_pretraining_data.py \
   --num_train_steps=20 \
   --num_warmup_steps=10 \
   --learning_rate=2e-5
-  
+
 
   python run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
@@ -44,11 +43,11 @@ python create_pretraining_data.py \
   --num_train_epochs=2.0 \
   --max_seq_length=$MAX_SEQ_LEN \
   --doc_stride=128 \
-  --output_dir=$OUTPUT_DIR\
+  --output_dir=$SQUAD_DIR\
   --version_2_with_negative=True
 
 python $SQUAD_DIR/evaluate-v2.0.py \
   $SQUAD_DIR/fake_train-v2.0.json \
-  $OUTPUT_DIR/predictions.json \
-  --na-prob-file $OUTPUT_DIR/null_odds.json
+  $SQUAD_DIR/predictions.json \
+  --na-prob-file $SQUAD_DIR/null_odds.json
 

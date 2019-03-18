@@ -47,7 +47,7 @@ python create_pretraining_data.py \
   --version_2_with_negative=True
 
 python $SQUAD_DIR/evaluate-v2.0.py \
-  $SQUAD_DIR/train-v2.0.json \
+  $SQUAD_DIR/fake_train-v2.0.json \
   $OUTPUT_DIR/predictions.json \
   --na-prob-file $OUTPUT_DIR/null_odds.json
 

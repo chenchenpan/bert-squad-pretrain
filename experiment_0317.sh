@@ -1,6 +1,6 @@
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
 SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
-OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/squad
+OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/squad/output
 MAX_SEQ_LEN=128
 BATCH_SIZE=32
 

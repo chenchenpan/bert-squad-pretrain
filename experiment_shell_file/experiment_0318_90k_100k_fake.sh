@@ -1,29 +1,32 @@
 export CUDA_VISIBLE_DEVICES=0
-INPUT_DIR=$HOME/projects/bert-squad-pretrain
-BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
-
-OUTPUT_DIR_1=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-ftseq_128-0318/
-INIT_CKPT_1=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12/bert_model.ckpt
-
-OUTPUT_DIR_2=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-ftseq_128-0318-2dseq_384/
-INIT_CKPT_2=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-ftseq_128-0318/model.ckpt-200
-
-INIT_CKPT_3=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-ftseq_128-0318-2dseq_384/model.ckpt-100
-
-SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
-OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/pred-0318-train_90k-ftseq_128-100k-2dseq_384/
 
 MAX_SEQ_LEN_1=128
 MAX_PREDS_1=20
 BATCH_SIZE_1=12
-STEPS_1=200
-WARM_UP_1=10
+STEPS_1=10
+WARM_UP_1=2
 
 MAX_SEQ_LEN_2=384
 MAX_PREDS_2=60
 BATCH_SIZE_2=6
-STEPS_2=100
-WARM_UP_2=10
+STEPS_2=10
+WARM_UP_2=2
+
+INPUT_DIR=$HOME/projects/bert-squad-pretrain
+BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
+
+OUTPUT_DIR_1=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-seq_128-0318/
+INIT_CKPT_1=$BERT_BASE_DIR/bert_model.ckpt
+
+OUTPUT_DIR_2=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-seq_128-0318-ftseq_384/
+INIT_CKPT_2=$OUTPUT_DIR_1/model.ckpt-$STEPS_1
+
+INIT_CKPT_3=$OUTPUT_DIR_2/model.ckpt-$STEPS_2
+
+SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
+OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/pred/0318-train_90k-seq_128-100k-ftseq_384/
+
+
 
 
 python create_pretraining_data.py \
@@ -74,7 +77,7 @@ python run_squad.py \
   --do_predict=True \
   --predict_file=$SQUAD_DIR/fake_train-v2.0.json \
   --train_batch_size=$BATCH_SIZE_2 \
-  --learning_rate=3e-2 \
+  --learning_rate=3e-5 \
   --num_train_epochs=2.0 \
   --max_seq_length=$MAX_SEQ_LEN_2 \
   --doc_stride=128 \

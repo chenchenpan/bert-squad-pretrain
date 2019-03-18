@@ -29,6 +29,7 @@ python create_pretraining_data.py \
   --num_train_steps=20 \
   --num_warmup_steps=10 \
   --learning_rate=2e-5
+  
 
   python run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
@@ -43,7 +44,7 @@ python create_pretraining_data.py \
   --num_train_epochs=2.0 \
   --max_seq_length=$MAX_SEQ_LEN \
   --doc_stride=128 \
-  --output_dir=$SQUAD_DIR\
+  --output_dir=$OUTPUT_DIR\
   --version_2_with_negative=True
 
 python $SQUAD_DIR/evaluate-v2.0.py \

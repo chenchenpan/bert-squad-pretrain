@@ -15,21 +15,20 @@ WARM_UP_2=2
 INPUT_DIR=$HOME/projects/bert-squad-pretrain
 BERT_BASE_DIR=$HOME/projects/bert-squad-pretrain/uncased_L-12_H-768_A-12
 
-OUTPUT_DIR_1=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-seq_128-0318/
+OUTPUT_DIR_1=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-seq_128-0318
 INIT_CKPT_1=$BERT_BASE_DIR/bert_model.ckpt
 
-OUTPUT_DIR_2=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-seq_128-0318-ftseq_384/
+OUTPUT_DIR_2=$HOME/projects/bert-squad-pretrain/output_dir/pretrain_on_squad-train_90k-seq_128-0318-ftseq_384
 INIT_CKPT_2=$OUTPUT_DIR_1/model.ckpt-$STEPS_1
 
 INIT_CKPT_3=$OUTPUT_DIR_2/model.ckpt-$STEPS_2
 
 SQUAD_DIR=$HOME/projects/bert-squad-pretrain/squad
-OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/pred/0318-train_90k-seq_128-100k-ftseq_384/
+OUTPUT_DIR=$HOME/projects/bert-squad-pretrain/pred/0318-train_90k-seq_128-100k-ftseq_384
 
 
 
-
-python create_pretraining_data.py \
+python $INPUT_DIR/create_pretraining_data.py \
   --input_file=$INPUT_DIR/pretrain_squad_fake.txt \
   --output_file=/tmp/tf_examples.tfrecord \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
@@ -40,7 +39,7 @@ python create_pretraining_data.py \
   --random_seed=12345 \
   --dupe_factor=5
 
-python run_pretraining.py \
+python $INPUT_DIR/run_pretraining.py \
   --input_file=/tmp/tf_examples.tfrecord \
   --output_dir=$OUTPUT_DIR_1 \
   --do_train=True \
@@ -54,7 +53,20 @@ python run_pretraining.py \
   --num_warmup_steps=$WARM_UP_1 \
   --learning_rate=2e-5
 
-python run_pretraining.py \
+rm /tmp/tf_examples.tfrecord
+
+python $INPUT_DIR/create_pretraining_data.py \
+  --input_file=$INPUT_DIR/pretrain_squad_fake.txt \
+  --output_file=/tmp/tf_examples.tfrecord \
+  --vocab_file=$BERT_BASE_DIR/vocab.txt \
+  --do_lower_case=True \
+  --max_seq_length=$MAX_SEQ_LEN_2 \
+  --max_predictions_per_seq=$MAX_PREDS_2 \
+  --masked_lm_prob=0.15 \
+  --random_seed=12345 \
+  --dupe_factor=5
+
+python $INPUT_DIR/run_pretraining.py \
   --input_file=/tmp/tf_examples.tfrecord \
   --output_dir=$OUTPUT_DIR_2 \
   --do_train=True \
@@ -68,7 +80,7 @@ python run_pretraining.py \
   --num_warmup_steps=$WARM_UP_2 \
   --learning_rate=2e-5
 
-python run_squad.py \
+python $INPUT_DIR/run_squad.py \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
   --bert_config_file=$BERT_BASE_DIR/bert_config.json \
   --init_checkpoint=$INIT_CKPT_3 \
